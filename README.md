@@ -60,3 +60,13 @@ WX_KEY      : "微信开放平台的AppSecret"
 |pay_token|E04E9BA9FAC2A73764BF4271F4E2EEC4|
 |ret|0|
 |openid|25669D12122479868B3C301B82AF27BE|
+
+### 微信授权返回字段
+|字段|值|
+|:-|:-|
+|unionid|oD71AvwjJwgpDLN0xklYj8ZHT5gw|
+|scope|snsapi_userinfo|
+|expires_in|7200|
+|access_token|0JtyoWx794WtPy36nrSRTpi84jWG2LpyeS0HGgIN1f55h1ztUlvI3xYpHdJKmpYXSGpRovztWO__EGzFOZqim40sTaFm982RxavMpFAQRBw|
+|openid|oVtG3ww7PQf-KerxlEIbss3yL-XY|
+|refresh_token|t-R6hhdizs3tojShYjGOw4ziQ803lMM0IpvMYqMxjzcW4OJkbJwmvom-jVXbW2ygaPurGogkSyfBcXgJYteQq7nee2UHyvNxS02WUw0dlHU|
