@@ -117,3 +117,8 @@ WX_KEY      : "微信开放平台的AppSecret"
 |expiration|1495103342757|
 |language|zh_CN|
 |expires_in|1495103342757|
+
+
+### 联系作者
+> 请使用QQ扫码加群 小伙伴们等着你哦!
+![](https://raw.githubusercontent.com/angcyo/res/master/image/qq/qq_group_code.png)
