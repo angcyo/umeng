@@ -70,3 +70,50 @@ WX_KEY      : "微信开放平台的AppSecret"
 |access_token|0JtyoWx794WtPy36nrSRTpi84jWG2LpyeS0HGgIN1f55h1ztUlvI3xYpHdJKmpYXSGpRovztWO__EGzFOZqim40sTaFm982RxavMpFAQRBw|
 |openid|oVtG3ww7PQf-KerxlEIbss3yL-XY|
 |refresh_token|t-R6hhdizs3tojShYjGOw4ziQ803lMM0IpvMYqMxjzcW4OJkbJwmvom-jVXbW2ygaPurGogkSyfBcXgJYteQq7nee2UHyvNxS02WUw0dlHU|
+
+### QQ 平台信息返回
+|字段|值|
+|:-|:-|
+|unionid||
+|is_yellow_vip|0|
+|screen_name|　|
+|msg||
+|vip|0|
+|city|南昌|
+|accessToken|48ED6CF2C42EB83A15E7152FEF86B507|
+|gender|男|
+|province|江西|
+|is_yellow_year_vip|0|
+|openid|25669D12122479868B3C301B82AF27BE|
+|yellow_vip_level|0|
+|profile_image_url|http://q.qlogo.cn/qqapp/1106097075/25669D12122479868B3C301B82AF27BE/100|
+|access_token|48ED6CF2C42EB83A15E7152FEF86B507|
+|iconurl|http://q.qlogo.cn/qqapp/1106097075/25669D12122479868B3C301B82AF27BE/100|
+|name|　|
+|uid|25669D12122479868B3C301B82AF27BE|
+|expiration|1502873607527|
+|expires_in|1502873607527|
+|level|0|
+|ret|0|
+
+
+### 微信 平台信息返回
+|字段|值|
+|:-|:-|
+|unionid|oD71AvwjJwgpDLN0xklYj8ZHT5gw|
+|screen_name|Spot|
+|city|东莞|
+|accessToken|0JtyoWx794WtPy36nrSRTpi84jWG2LpyeS0HGgIN1f55h1ztUlvI3xYpHdJKmpYXSGpRovztWO__EGzFOZqim40sTaFm982RxavMpFAQRBw|
+|refreshToken|t-R6hhdizs3tojShYjGOw4ziQ803lMM0IpvMYqMxjzcW4OJkbJwmvom-jVXbW2ygaPurGogkSyfBcXgJYteQq7nee2UHyvNxS02WUw0dlHU|
+|gender|0|
+|province|广东|
+|openid|oVtG3ww7PQf-KerxlEIbss3yL-XY|
+|profile_image_url|http://wx.qlogo.cn/mmopen/CkBYF6IYNs07Vy1ibWfiajd8eZWLNdhicuzFyHRNOBFvb2LbzEtib4bt2oIbLrLlmgdXVCaHJzwNHia8E2wPgppnFv1AdamCw6yicB/0|
+|country|中国|
+|access_token|0JtyoWx794WtPy36nrSRTpi84jWG2LpyeS0HGgIN1f55h1ztUlvI3xYpHdJKmpYXSGpRovztWO__EGzFOZqim40sTaFm982RxavMpFAQRBw|
+|iconurl|http://wx.qlogo.cn/mmopen/CkBYF6IYNs07Vy1ibWfiajd8eZWLNdhicuzFyHRNOBFvb2LbzEtib4bt2oIbLrLlmgdXVCaHJzwNHia8E2wPgppnFv1AdamCw6yicB/0|
+|name|Spot|
+|uid|oD71AvwjJwgpDLN0xklYj8ZHT5gw|
+|expiration|1495103342757|
+|language|zh_CN|
+|expires_in|1495103342757|
