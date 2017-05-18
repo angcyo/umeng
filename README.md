@@ -120,5 +120,6 @@ WX_KEY      : "微信开放平台的AppSecret"
 
 
 ### 联系作者
-> 请使用QQ扫码加群 小伙伴们等着你哦!
+> 请使用QQ扫码加群, 小伙伴们在等着你哦!
+
 ![](https://raw.githubusercontent.com/angcyo/res/master/image/qq/qq_group_code.png)
