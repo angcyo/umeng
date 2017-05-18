@@ -1,4 +1,4 @@
-package com.hn.d.valley.wxapi;
+package com;
 
 
 /**
@@ -16,6 +16,9 @@ package com.hn.d.valley.wxapi;
 
 import com.umeng.socialize.weixin.view.WXCallbackActivity;
 
+/**
+ * 请将此文件复制到 开发app的包名.wxapi 文件夹中.
+ */
 public class WXEntryActivity extends WXCallbackActivity {
 
 }
