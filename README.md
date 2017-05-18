@@ -10,11 +10,8 @@
 打开项目中的 `build.gradle` 文件:
 你会看到配置以下信息:
 ```
-/*友盟APP_KEY*/
 UMENG_APPKEY: "替换你申请的友盟KEY",
-/*需要使用库的工程包名*/
 PROJECT_NAME: "替换成开发中APP的包名(如 com.angcyo.demo)",
-/*开放平台申请key*/
 QQ_ID       : "QQ开放平台的APPID",
 QQ_KEY      : "QQ开放平台的APPKEY",
 WX_ID       : "微信开放平台的AppID",
@@ -46,3 +43,20 @@ WX_KEY      : "微信开放平台的AppSecret"
 
 > 您也可以自定义缺失的方法.
 
+# 附录
+### QQ 授权返回字段
+|字段|值|
+|:-|:-|
+|unionid||
+|access_token|48ED6CF2C42EB83A15E7152FEF86B507|
+|page_type|
+|appid|
+|pfkey|6dcd5ed1a0c99fb4e3b615474a5ab8a5|
+|uid|25669D12122479868B3C301B82AF27BE|
+|auth_time|
+|sendinstall|
+|pf|desktop_m_qq-10000144-android-2002-|
+|expires_in|7776000|
+|pay_token|E04E9BA9FAC2A73764BF4271F4E2EEC4|
+|ret|0|
+|openid|25669D12122479868B3C301B82AF27BE|
