@@ -1,0 +1,44 @@
+apply plugin: 'com.android.library'
+
+// 友盟6.4.4 QQ 微信,分享 登录 / 应用统计6.1.0
+
+android {
+    compileSdkVersion Integer.parseInt(rootProject.C_SDK)
+    buildToolsVersion rootProject.B_TOOLS
+
+    defaultConfig {
+        minSdkVersion Integer.parseInt(rootProject.M_SDK)
+        targetSdkVersion Integer.parseInt(rootProject.T_SDK)
+        versionCode 1
+        versionName "1.0"
+
+        manifestPlaceholders = [
+                /*友盟APP_KEY*/
+                UMENG_APPKEY: "55db0066e0f55a03de004938",
+                /*需要使用库的工程包名*/
+                PROJECT_NAME: "com.hn.d.valley",
+                /*开放平台申请key*/
+                QQ_ID       : "1106097075",
+                QQ_KEY      : "IsbX0vmkDIXvyoxo",
+                WX_ID       : "wx813dd6b4a7b4a9ff",
+                WX_KEY      : "fd40969eb2864b46ac9ac794f3e63fca"
+        ]
+
+        //请记得调用UM.init(), 初始化!
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}

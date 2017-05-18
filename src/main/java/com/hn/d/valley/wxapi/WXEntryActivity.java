@@ -1,0 +1,21 @@
+package com.hn.d.valley.wxapi;
+
+
+/**
+ * 使用微信分享或者登陆功能
+ * <p>
+ * 在包名目录下创建wxapi文件夹，
+ * 新建一个名为WXEntryActivity的activity继承WXCallbackActivity。
+ * 这里注意一定是包名路径下，例如我的包名是com.umeng.soexample,则配置如下：
+ * (需要注意，如果使用精简版WXCallbackActivity的路径为com.umeng.weixin.callback.WXCallbackActivity,
+ * 如果使用完整版路径是com.umeng.socialize.weixin.view.WXCallbackActivity)
+ */
+//import com.umeng.weixin.callback.WXCallbackActivity;//精简版导入这个
+
+//完整版导入这个
+
+import com.umeng.socialize.weixin.view.WXCallbackActivity;
+
+public class WXEntryActivity extends WXCallbackActivity {
+
+}
