@@ -14,14 +14,14 @@ android {
 
         manifestPlaceholders = [
                 /*友盟APP_KEY*/
-                UMENG_APPKEY: "替换你申请的友盟KEY",
+                UMENG_APPKEY: "55db0066e0f55a03de004938",
                 /*需要使用库的工程包名*/
-                PROJECT_NAME: "替换成开发中APP的包名(如 com.angcyo.demo)",
+                PROJECT_NAME: "com.hn.d.valley",
                 /*开放平台申请key*/
-                QQ_ID       : "QQ开放平台的APPID",
-                QQ_KEY      : "QQ开放平台的APPKEY",
-                WX_ID       : "微信开放平台的AppID",
-                WX_KEY      : "微信开放平台的AppSecret"
+                QQ_ID       : "1106097075",
+                QQ_KEY      : "IsbX0vmkDIXvyoxo",
+                WX_ID       : "wx813dd6b4a7b4a9ff",
+                WX_KEY      : "fd40969eb2864b46ac9ac794f3e63fca"
         ]
 
         //请记得调用UM.init(), 初始化!
