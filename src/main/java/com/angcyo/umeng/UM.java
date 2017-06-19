@@ -5,7 +5,9 @@ import android.app.Application;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.text.TextUtils;
 
+import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.ShareAction;
@@ -40,9 +42,11 @@ public class UM {
 
         Config.DEBUG = debug;
 
-        UMShareAPI.get(sApplication);
+        getUMShareAPI();
 
         initPlatformConfig();
+
+        MobclickAgent.setCatchUncaughtExceptions(true);
     }
 
     static void initPlatformConfig() {
@@ -66,21 +70,21 @@ public class UM {
      * 删除授权
      */
     public static void deleteAuth(Activity activity, SHARE_MEDIA platform, UMAuthListener listener) {
-        UMShareAPI.get(sApplication).deleteOauth(activity, platform, listener);
+        getUMShareAPI().deleteOauth(activity, platform, listener);
     }
 
     /**
      * 授权验证
      */
     public static void authVerify(Activity activity, SHARE_MEDIA platform, UMAuthListener listener) {
-        UMShareAPI.get(sApplication).doOauthVerify(activity, platform, listener);
+        getUMShareAPI().doOauthVerify(activity, platform, listener);
     }
 
     /**
      * 返回是否授权
      */
     public static boolean isAuthorize(Activity activity, SHARE_MEDIA platform) {
-        return UMShareAPI.get(sApplication).isAuthorize(activity, platform);
+        return getUMShareAPI().isAuthorize(activity, platform);
     }
 
     /**
@@ -91,7 +95,7 @@ public class UM {
      * 如果已授权, 会直接返回数据
      */
     public static void getPlatformInfo(Activity activity, SHARE_MEDIA platform, UMAuthListener listener) {
-        UMShareAPI.get(sApplication).getPlatformInfo(activity, platform, listener);
+        getUMShareAPI().getPlatformInfo(activity, platform, listener);
     }
 
     /**
@@ -156,12 +160,31 @@ public class UM {
                                 String title, String des,
                                 String text,
                                 UMShareListener listener) {
+        shareWeb(activity, shareMedia, url,
+                thumbRes == -1 ? null : new UMImage(activity, thumbRes),
+                title, des, text, listener);
+    }
+
+    public static void shareWeb(Activity activity, SHARE_MEDIA shareMedia,
+                                String url, String thumbRes,
+                                String title, String des,
+                                String text,
+                                UMShareListener listener) {
+        shareWeb(activity, shareMedia, url,
+                TextUtils.isEmpty(thumbRes) ? null : new UMImage(activity, thumbRes),
+                title, des, text, listener);
+    }
+
+    public static void shareWeb(Activity activity, SHARE_MEDIA shareMedia,
+                                String url, UMImage thumbImage,
+                                String title, String des,
+                                String text,
+                                UMShareListener listener) {
         UMWeb web = new UMWeb(url);
         web.setTitle(title);//标题
         //缩略图
-        if (thumbRes != -1) {
-            UMImage umThumb = new UMImage(activity, thumbRes);
-            web.setThumb(umThumb);
+        if (thumbImage != null) {
+            web.setThumb(thumbImage);
         }
         web.setDescription(des);//描述
 
@@ -182,10 +205,49 @@ public class UM {
     }
 
     public static void onActivityResult(int requestCode, int resultCode, Intent data) {
-        UMShareAPI.get(sApplication).onActivityResult(requestCode, resultCode, data);
+        if (getUMShareAPI() != null) {
+            getUMShareAPI().onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    private static UMShareAPI getUMShareAPI() {
+        UMShareAPI umShareAPI = null;
+        if (sApplication != null) {
+            umShareAPI = UMShareAPI.get(sApplication);
+        }
+        return umShareAPI;
     }
 
     public static void onDestroy() {
-        UMShareAPI.get(sApplication).release();
+        getUMShareAPI().release();
+    }
+
+    /**
+     * 友盟事件统计
+     */
+    public static void onEvent(String eventId) {
+        MobclickAgent.onEvent(sApplication, eventId);
+    }
+
+    public static abstract class UMListener implements UMShareListener {
+        @Override
+        public void onStart(SHARE_MEDIA share_media) {
+
+        }
+
+        @Override
+        public void onResult(SHARE_MEDIA share_media) {
+
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+            throwable.printStackTrace();
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA share_media) {
+
+        }
     }
 }
