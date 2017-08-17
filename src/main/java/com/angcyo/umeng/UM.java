@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.text.TextUtils;
 
 import com.umeng.analytics.MobclickAgent;
@@ -61,6 +62,19 @@ public class UM {
 
             PlatformConfig.setWeixin(wx_id, wx_key);
             PlatformConfig.setQQZone(qq_id, qq_key);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            ApplicationInfo applicationInfo = sApplication.getPackageManager()
+                    .getApplicationInfo(sApplication.getPackageName(), PackageManager.GET_META_DATA);
+
+            String sina_key = String.valueOf(applicationInfo.metaData.get("SINA_KEY"));
+            String sina_secret = String.valueOf(applicationInfo.metaData.get("SINA_SECRET"));
+            String sina_redirect = String.valueOf(applicationInfo.metaData.get("SINA_REDIRECT"));
+
+            PlatformConfig.setSinaWeibo(sina_key, sina_secret, sina_redirect);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -125,6 +139,17 @@ public class UM {
             UMImage umThumb = new UMImage(activity, thumbRes);
             umImage.setThumb(umThumb);
         }
+        new ShareAction(activity)
+                .setPlatform(shareMedia)
+                .withMedia(umImage)
+                .setCallback(listener)
+                .share();
+    }
+
+    public static void shareImage(Activity activity, SHARE_MEDIA shareMedia,
+                                  Bitmap bitmap,
+                                  UMShareListener listener) {
+        UMImage umImage = new UMImage(activity, bitmap);
         new ShareAction(activity)
                 .setPlatform(shareMedia)
                 .withMedia(umImage)
