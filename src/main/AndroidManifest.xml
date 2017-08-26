@@ -23,9 +23,10 @@
         </meta-data>
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="Preview">
+            android:value="${UMENG_CHANNEL}">
         </meta-data>
 
+        <!--QQ配置-->
         <meta-data
             android:name="QQ_ID"
             android:value="${QQ_ID}">
@@ -36,14 +37,28 @@
             android:value="${QQ_KEY}">
         </meta-data>
 
+        <!--微信配置-->
         <meta-data
             android:name="WX_ID"
             android:value="${WX_ID}">
         </meta-data>
-
         <meta-data
             android:name="WX_KEY"
             android:value="${WX_KEY}">
+        </meta-data>
+
+        <!--新浪配置-->
+        <meta-data
+            android:name="SINA_KEY"
+            android:value="${SINA_KEY}">
+        </meta-data>
+        <meta-data
+            android:name="SINA_SECRET"
+            android:value="${SINA_SECRET}">
+        </meta-data>
+        <meta-data
+            android:name="SINA_REDIRECT"
+            android:value="${SINA_REDIRECT}">
         </meta-data>
         <!--************************* Key配置 **************************end-->
 

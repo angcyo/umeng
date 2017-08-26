@@ -16,6 +16,7 @@ android {
         manifestPlaceholders = [
                 /*友盟APP_KEY*/
                 UMENG_APPKEY : "55db0066e0f55a03de004938",
+                UMENG_CHANNEL: "develop",
                 /*需要使用库的工程包名*/
                 PROJECT_NAME : "com.hn.d.valley",
                 /*开放平台申请key*/
@@ -26,7 +27,7 @@ android {
                 /*微博配置*/
                 SINA_KEY     : "1172045639",
                 SINA_SECRET  : "26eb5f8111578a2a743ed68a55a5feff",
-                SINA_REDIRECT: ""
+                SINA_REDIRECT: "http://sns.whalecloud.com"
         ]
 
         //请记得调用UM.init(), 初始化!
