@@ -119,11 +119,16 @@ public class UM {
      */
     public static void shareText(Activity activity, SHARE_MEDIA shareMedia,
                                  String shareText, UMShareListener listener) {
-        new ShareAction(activity)
-                .setPlatform(shareMedia)
-                .withText(shareText)
-                .setCallback(listener)
-                .share();
+        try {
+            new ShareAction(activity)
+                    .setPlatform(shareMedia)
+                    .withText(shareText)
+                    .setCallback(listener)
+                    .share();
+        } catch (Exception e) {
+            e.printStackTrace();
+            listener.onError(shareMedia, e);
+        }
     }
 
     /**
@@ -139,22 +144,32 @@ public class UM {
             UMImage umThumb = new UMImage(activity, thumbRes);
             umImage.setThumb(umThumb);
         }
-        new ShareAction(activity)
-                .setPlatform(shareMedia)
-                .withMedia(umImage)
-                .setCallback(listener)
-                .share();
+        try {
+            new ShareAction(activity)
+                    .setPlatform(shareMedia)
+                    .withMedia(umImage)
+                    .setCallback(listener)
+                    .share();
+        } catch (Exception e) {
+            e.printStackTrace();
+            listener.onError(shareMedia, e);
+        }
     }
 
     public static void shareImage(Activity activity, SHARE_MEDIA shareMedia,
                                   Bitmap bitmap,
                                   UMShareListener listener) {
         UMImage umImage = new UMImage(activity, bitmap);
-        new ShareAction(activity)
-                .setPlatform(shareMedia)
-                .withMedia(umImage)
-                .setCallback(listener)
-                .share();
+        try {
+            new ShareAction(activity)
+                    .setPlatform(shareMedia)
+                    .withMedia(umImage)
+                    .setCallback(listener)
+                    .share();
+        } catch (Exception e) {
+            e.printStackTrace();
+            listener.onError(shareMedia, e);
+        }
     }
 
     /**
@@ -169,12 +184,17 @@ public class UM {
             UMImage umThumb = new UMImage(activity, thumbRes);
             umImage.setThumb(umThumb);
         }
-        new ShareAction(activity)
-                .setPlatform(shareMedia)
-                .withMedia(umImage)
-                .withText(text)
-                .setCallback(listener)
-                .share();
+        try {
+            new ShareAction(activity)
+                    .setPlatform(shareMedia)
+                    .withMedia(umImage)
+                    .withText(text)
+                    .setCallback(listener)
+                    .share();
+        } catch (Exception e) {
+            e.printStackTrace();
+            listener.onError(shareMedia, e);
+        }
     }
 
     /**
@@ -213,12 +233,17 @@ public class UM {
         }
         web.setDescription(des);//描述
 
-        new ShareAction(activity)
-                .setPlatform(shareMedia)
-                .withMedia(web)
-                .withText(text)
-                .setCallback(listener)
-                .share();
+        try {
+            new ShareAction(activity)
+                    .setPlatform(shareMedia)
+                    .withMedia(web)
+                    .withText(text)
+                    .setCallback(listener)
+                    .share();
+        } catch (Exception e) {
+            e.printStackTrace();
+            listener.onError(shareMedia, e);
+        }
     }
 
     public static void checkQQ(Activity activity) {
