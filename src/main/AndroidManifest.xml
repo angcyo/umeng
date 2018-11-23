@@ -1,0 +1,81 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.angcyo.umeng">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+
+    <application
+            android:allowBackup="true"
+            android:label="@string/app_name"
+            android:supportsRtl="true">
+
+        <!--KEY配置信息-->
+        <meta-data
+                android:name="UMENG_APPKEY"
+                android:value="${UMENG_APPKEY}">
+        </meta-data>
+        <meta-data
+                android:name="UMENG_CHANNEL"
+                android:value="Preview">
+        </meta-data>
+
+        <meta-data
+                android:name="QQ_ID"
+                android:value="${QQ_ID}">
+        </meta-data>
+
+        <meta-data
+                android:name="QQ_KEY"
+                android:value="${QQ_KEY}">
+        </meta-data>
+
+        <meta-data
+                android:name="WX_ID"
+                android:value="${WX_ID}">
+        </meta-data>
+
+        <meta-data
+                android:name="WX_KEY"
+                android:value="${WX_KEY}">
+        </meta-data>
+        <!--************************* Key配置 **************************end-->
+
+        <!--以下都是友盟完整版配置-->
+        <activity
+                android:name="${PROJECT_NAME}.wxapi.WXEntryActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:exported="true"
+                android:screenOrientation="portrait"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+
+        <!--友盟6.9.4-->
+        <activity
+                android:name="com.tencent.tauth.AuthActivity"
+                android:launchMode="singleTask"
+                android:noHistory="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="tencent${QQ_ID}"/>
+            </intent-filter>
+
+        </activity>
+
+        <activity
+                android:name="com.tencent.connect.common.AssistActivity"
+                android:screenOrientation="portrait"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar"
+                android:configChanges="orientation|keyboardHidden|screenSize"/>
+
+    </application>
+
+</manifest>

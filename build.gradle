@@ -1,0 +1,54 @@
+apply plugin: 'com.android.library'
+
+// 友盟6.4.4 QQ 微信,分享 登录 / 应用统计6.1.0  请使用um644分支
+
+// 友盟6.9.4 QQ 微信 分享 登录精简版.
+
+
+def _C_SDK = hasProperty("C_SDK") ? ext.C_SDK : '28'
+def _M_SDK = hasProperty("M_SDK") ? ext.M_SDK : '21'
+def _T_SDK = hasProperty("T_SDK") ? ext.T_SDK : '28'
+def _V_CODE = hasProperty("V_CODE") ? ext.V_CODE : '1'
+def _V_NAME = hasProperty("V_NAME") ? ext.V_NAME : '1.0'
+//"替换成开发中APP的包名(如 com.angcyo.demo)"
+def application_id = hasProperty("application_id") ? ext.application_id : 'com.angcyo.demo'
+
+android {
+    compileSdkVersion Integer.parseInt(_C_SDK)
+
+    defaultConfig {
+        minSdkVersion Integer.parseInt(_M_SDK)
+        targetSdkVersion Integer.parseInt(_T_SDK)
+        versionCode 1
+        versionName "1.0"
+
+        manifestPlaceholders = [
+                /*友盟APP_KEY*/
+                UMENG_APPKEY: "替换你申请的友盟KEY",
+                /*需要使用库的工程包名*/
+                PROJECT_NAME: "$application_id",
+                /*开放平台申请key*/
+                QQ_ID       : "QQ开放平台的APPID",
+                QQ_KEY      : "QQ开放平台的APPKEY",
+                WX_ID       : "微信开放平台的AppID",
+                WX_KEY      : "微信开放平台的AppSecret"
+        ]
+
+        //请记得调用UM.init(), 初始化!
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+}
