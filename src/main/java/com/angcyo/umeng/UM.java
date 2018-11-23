@@ -6,6 +6,14 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.*;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -108,9 +116,32 @@ public class UM {
      */
     public static void shareText(Activity activity, SHARE_MEDIA shareMedia,
                                  String shareText, UMShareListener listener) {
-        action(activity, shareMedia, listener)
-                .withText(shareText)
-                .share();
+        if (shareMedia == SHARE_MEDIA.QQ) {
+            //将文本转成图片
+            FrameLayout frameLayout = new FrameLayout(activity);
+            frameLayout.setBackgroundColor(Color.WHITE);
+
+            TextView textView = new TextView(activity);
+            textView.setText(shareText);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+            frameLayout.setPadding(4, 4, 4, 4);
+            frameLayout.addView(textView, new ViewGroup.LayoutParams(-2, -2));
+
+            DisplayMetrics metrics = activity.getResources().getDisplayMetrics();
+            frameLayout.measure(View.MeasureSpec.makeMeasureSpec(metrics.widthPixels, View.MeasureSpec.AT_MOST),
+                    View.MeasureSpec.makeMeasureSpec(metrics.heightPixels, View.MeasureSpec.AT_MOST));
+            frameLayout.layout(0, 0, frameLayout.getMeasuredWidth(), frameLayout.getMeasuredHeight());
+
+            Bitmap bitmap = Bitmap.createBitmap(frameLayout.getMeasuredWidth(), frameLayout.getMeasuredHeight(), Bitmap.Config.ARGB_4444);
+            Canvas canvas = new Canvas(bitmap);
+            frameLayout.draw(canvas);
+
+            shareImage(activity, shareMedia, bitmap, -1, listener);
+        } else {
+            action(activity, shareMedia, listener)
+                    .withText(shareText)
+                    .share();
+        }
     }
 
     /**
