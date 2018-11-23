@@ -118,21 +118,23 @@ public class UM {
                                  String shareText, UMShareListener listener) {
         if (shareMedia == SHARE_MEDIA.QQ) {
             //将文本转成图片
+            DisplayMetrics metrics = activity.getResources().getDisplayMetrics();
+            int padding = (int) (metrics.density * 4);
+
             FrameLayout frameLayout = new FrameLayout(activity);
             frameLayout.setBackgroundColor(Color.WHITE);
 
             TextView textView = new TextView(activity);
             textView.setText(shareText);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
-            frameLayout.setPadding(4, 4, 4, 4);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 8);
+            frameLayout.setPadding(padding, padding, padding, padding);
             frameLayout.addView(textView, new ViewGroup.LayoutParams(-2, -2));
 
-            DisplayMetrics metrics = activity.getResources().getDisplayMetrics();
             frameLayout.measure(View.MeasureSpec.makeMeasureSpec(metrics.widthPixels, View.MeasureSpec.AT_MOST),
                     View.MeasureSpec.makeMeasureSpec(metrics.heightPixels, View.MeasureSpec.AT_MOST));
             frameLayout.layout(0, 0, frameLayout.getMeasuredWidth(), frameLayout.getMeasuredHeight());
 
-            Bitmap bitmap = Bitmap.createBitmap(frameLayout.getMeasuredWidth(), frameLayout.getMeasuredHeight(), Bitmap.Config.ARGB_4444);
+            Bitmap bitmap = Bitmap.createBitmap(frameLayout.getMeasuredWidth(), frameLayout.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(bitmap);
             frameLayout.draw(canvas);
 
