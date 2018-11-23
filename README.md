@@ -8,6 +8,8 @@
 暂时只集成了, QQ和微信 精简版 的分享和登录功能.
 
 [友盟接入文档](https://developer.umeng.com/docs/66632/detail/66639)
+[友盟key申请](https://mobile.umeng.com/apps)
+
 
 # 使用方法
 ## 1:
