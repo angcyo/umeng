@@ -24,12 +24,12 @@ android {
 
         manifestPlaceholders = [
                 /*友盟APP_KEY*/
-                UMENG_APPKEY: "替换你申请的友盟KEY",
+                UMENG_APPKEY: "5bf76512b465f534b500001d",
                 /*需要使用库的工程包名*/
                 PROJECT_NAME: "$application_id",
                 /*开放平台申请key*/
-                QQ_ID       : "QQ开放平台的APPID",
-                QQ_KEY      : "QQ开放平台的APPKEY",
+                QQ_ID       : "1106698615",
+                QQ_KEY      : "kxpG8mtUZNvi6tB3",
                 WX_ID       : "微信开放平台的AppID",
                 WX_KEY      : "微信开放平台的AppSecret"
         ]
@@ -51,4 +51,7 @@ android {
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
+
+//    api 'com.umeng.sdk:common:1.5.4'
+//    api 'com.umeng.sdk:utdid:1.1.5.3'
 }
