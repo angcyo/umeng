@@ -30,11 +30,13 @@ android {
                 /*开放平台申请key*/
                 QQ_ID       : "1106698615",
                 QQ_KEY      : "kxpG8mtUZNvi6tB3",
-                WX_ID       : "微信开放平台的AppID",
-                WX_KEY      : "微信开放平台的AppSecret"
+                WX_ID       : "wx34e23f7b7ed598c1",
+                WX_KEY      : "bc372e7214ab128772a84042a22add47"
         ]
 
         //请记得调用UM.init(), 初始化!
+        //如果支持微信,还需要复制 WXEntryActivity 文件到指定目录
+        //请记得回调 UM.onActivityResult
     }
 
     buildTypes {

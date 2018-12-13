@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ import java.util.Map;
  */
 public class UM {
 
+    public static final String TAG = "UM";
     private static Application sApplication;
 
     /**
@@ -48,6 +50,13 @@ public class UM {
         UMShareAPI.get(sApplication);
 
         initPlatformConfig();
+
+        /**
+         * 设置每次登录拉取确认界面
+         * */
+        UMShareConfig config = new UMShareConfig();
+        config.isNeedAuthOnGetUserInfo(true);
+        UMShareAPI.get(application).setShareConfig(config);
 
         try {
             ApplicationInfo applicationInfo = sApplication.getPackageManager()
@@ -62,21 +71,39 @@ public class UM {
         }
     }
 
-    static void initPlatformConfig() {
+    private static void initPlatformConfig() {
         try {
             ApplicationInfo applicationInfo = sApplication.getPackageManager()
                     .getApplicationInfo(sApplication.getPackageName(), PackageManager.GET_META_DATA);
 
-            String qq_id = String.valueOf(applicationInfo.metaData.get("QQ_ID"));
-            String qq_key = String.valueOf(applicationInfo.metaData.get("QQ_KEY"));
-            String wx_id = String.valueOf(applicationInfo.metaData.get("WX_ID"));
-            String wx_key = String.valueOf(applicationInfo.metaData.get("WX_KEY"));
+            String qqId = String.valueOf(applicationInfo.metaData.get("QQ_ID"));
+            String qqKey = String.valueOf(applicationInfo.metaData.get("QQ_KEY"));
+            String wxId = String.valueOf(applicationInfo.metaData.get("WX_ID"));
+            String wxKey = String.valueOf(applicationInfo.metaData.get("WX_KEY"));
 
-            PlatformConfig.setWeixin(wx_id, wx_key);
-            PlatformConfig.setQQZone(qq_id, qq_key);
+            PlatformConfig.setWeixin(wxId, wxKey);
+            PlatformConfig.setQQZone(qqId, qqKey);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * https://developer.umeng.com/docs/66632/detail/66849?um_channel=sdk
+     */
+    public static void onActivityResult(int requestCode, int resultCode, Intent data) {
+        UMShareAPI.get(sApplication).onActivityResult(requestCode, resultCode, data);
+    }
+
+    public static void onDestroy() {
+        UMShareAPI.get(sApplication).release();
+    }
+
+    /**
+     * 判断客户端是否安装
+     */
+    public static boolean isInstall(Activity activity, SHARE_MEDIA shareMedia) {
+        return UMShareAPI.get(sApplication).isInstall(activity, shareMedia);
     }
 
     /**
@@ -238,57 +265,79 @@ public class UM {
         UmengTool.checkWx(activity);
     }
 
-    public static void onActivityResult(int requestCode, int resultCode, Intent data) {
-        UMShareAPI.get(sApplication).onActivityResult(requestCode, resultCode, data);
-    }
-
-    public static void onDestroy() {
-        UMShareAPI.get(sApplication).release();
-    }
-
     public static class ShareListener implements UMShareListener {
 
         @Override
-        public void onStart(SHARE_MEDIA share_media) {
-
+        public void onStart(SHARE_MEDIA shareMedia) {
+            v("onStart");
         }
 
         @Override
-        public void onResult(SHARE_MEDIA share_media) {
-
+        public void onResult(SHARE_MEDIA shareMedia) {
+            v("onResult");
         }
 
         @Override
-        public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-
+        public void onError(SHARE_MEDIA shareMedia, Throwable throwable) {
+            v("onError");
         }
 
         @Override
-        public void onCancel(SHARE_MEDIA share_media) {
-
+        public void onCancel(SHARE_MEDIA shareMedia) {
+            v("onCancel");
         }
     }
 
     public static class AuthListener implements UMAuthListener {
 
         @Override
-        public void onStart(SHARE_MEDIA share_media) {
-
+        public void onStart(SHARE_MEDIA shareMedia) {
+            v("onStart");
         }
 
         @Override
-        public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+        public void onComplete(SHARE_MEDIA shareMedia, int i, Map<String, String> map) {
+            v("onComplete");
+            UMInfoBean umInfoBean = new UMInfoBean();
+            if (map != null) {
+                umInfoBean.setUid(map.get("uid"));
+                umInfoBean.setName(map.get("name"));
+                umInfoBean.setIconurl(map.get("iconurl"));
+                umInfoBean.setGender(map.get("gender"));
 
+                StringBuilder builder = new StringBuilder("Auth onComplete");
+                for (Map.Entry<String, String> entry : map.entrySet()) {
+                    builder.append("\n");
+                    builder.append(entry.getKey());
+                    builder.append(":");
+                    builder.append(entry.getValue());
+                }
+                v(builder.toString());
+            }
+
+            onResult(umInfoBean, null, false);
         }
 
         @Override
-        public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
-
+        public void onError(SHARE_MEDIA shareMedia, int i, Throwable throwable) {
+            v("onError");
+            onResult(null, throwable, false);
         }
 
         @Override
-        public void onCancel(SHARE_MEDIA share_media, int i) {
+        public void onCancel(SHARE_MEDIA shareMedia, int i) {
+            v("onCancel");
+            onResult(null, null, false);
+        }
 
+        public void onResult(UMInfoBean umInfoBean /*成功时有值*/, Throwable throwable /*错误时有值*/, boolean isCancel) {
+
+        }
+    }
+
+    private static void v(String text) {
+        if (BuildConfig.DEBUG) {
+            Log.v(TAG, text);
         }
     }
 }
