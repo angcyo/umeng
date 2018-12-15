@@ -315,22 +315,25 @@ public class UM {
                 v(builder.toString());
             }
 
-            onResult(umInfoBean, null, false);
+            onResult(map, umInfoBean, null, false);
         }
 
         @Override
         public void onError(SHARE_MEDIA shareMedia, int i, Throwable throwable) {
             v("onError");
-            onResult(null, throwable, false);
+            onResult(null, null, throwable, false);
         }
 
         @Override
         public void onCancel(SHARE_MEDIA shareMedia, int i) {
             v("onCancel");
-            onResult(null, null, false);
+            onResult(null, null, null, false);
         }
 
-        public void onResult(UMInfoBean umInfoBean /*成功时有值*/, Throwable throwable /*错误时有值*/, boolean isCancel) {
+        public void onResult(Map<String, String> map,
+                             UMInfoBean umInfoBean /*成功时有值*/,
+                             Throwable throwable /*错误时有值*/,
+                             boolean isCancel) {
 
         }
     }
