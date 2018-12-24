@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
@@ -243,18 +244,26 @@ public class UM {
                                 String text,
                                 UMShareListener listener) {
         UMWeb web = new UMWeb(url);
-        web.setTitle(title);//标题
+        if (!TextUtils.isEmpty(title)) {
+            web.setTitle(title);//标题
+        }
         //缩略图
         if (thumbRes != -1) {
             UMImage umThumb = new UMImage(activity, thumbRes);
             web.setThumb(umThumb);
         }
-        web.setDescription(des);//描述
+        if (!TextUtils.isEmpty(des)) {
+            web.setDescription(des);//描述
+        }
 
-        action(activity, shareMedia, listener)
-                .withMedia(web)
-                .withText(text)
-                .share();
+        ShareAction shareAction = action(activity, shareMedia, listener)
+                .withMedia(web);
+
+        if (!TextUtils.isEmpty(text)) {
+            shareAction.withText(text);
+        }
+
+        shareAction.share();
     }
 
     public static void checkQQ(Activity activity) {
