@@ -1,4 +1,8 @@
-apply plugin: 'com.android.library'
+if (getRootProject().hasProperty("allGradle")) {
+    apply from: allGradle.lib_base
+} else {
+    apply from: '../lib/lib_base.gradle'
+}
 
 // 友盟6.4.4 QQ 微信,分享 登录 / 应用统计6.1.0  请使用um644分支
 
@@ -37,17 +41,6 @@ android {
         //请记得调用UM.init(), 初始化!
         //如果支持微信,还需要复制 WXEntryActivity 文件到指定目录
         //请记得回调 UM.onActivityResult
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-
-    lintOptions {
-        abortOnError false
     }
 }
 
